@@ -32,3 +32,4 @@ alanning:roles
 jagi:astronomy-softremove-behavior
 jagi:astronomy-timestamp-behavior
 kadira:flow-router-ssr
+kadira:dochead
