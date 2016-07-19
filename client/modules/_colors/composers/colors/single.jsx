@@ -1,5 +1,6 @@
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
+import {DocHead} from 'meteor/kadira:dochead';
 
 export const singleComposer = ({context, _id, clearErrors}, onData) => {
   const {Meteor, Collections, LocalState} = context();
@@ -8,6 +9,12 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
     const record = Collections.Colors.findOne(_id);
     if (record) {
       onData(null, {record, error});
+      DocHead.setTitle(record.title);
+      if(record.content){
+        DocHead.addMeta({
+          name: 'description', content: record.content.substr(0, 50)
+        });
+      }
     }
   }
   //    returns clearErrors when unmounting the component
